@@ -7,4 +7,9 @@
     <item name="avgSplitContainer" type="id" />
     <item name="shotCountContainer" type="id" />
     <item name="retryButton" type="id" />
+    <item name="EndTimeContainer" type="id" />
+    <item name="DiffToParContainer" type="id" />
+    <item name="ShotsContainer" type="id" />
+    <item name="AvgSplitContainer" type="id" />
+    <item name="ShotCountContainer" type="id" />
 </resources>
