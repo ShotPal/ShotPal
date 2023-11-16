@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
-        android:text="Retry"
+        android:text="Start"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -120,6 +120,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ParTimeContainer">
 
         <!-- TextView for Mode -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -130,6 +131,46 @@
             android:text="Mode"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/LiveFireButton"
+            android:layout_width="90dp"
+            android:layout_height="37dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:text="Live Fire"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/CO2DryButton"
+            android:layout_width="90dp"
+            android:layout_height="37dp"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="40dp"
+            android:text="CO2 Dry"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/DryFireButton"
+            android:layout_width="90dp"
+            android:layout_height="37dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:text="Dry Fire"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/AirsoftButton"
+            android:layout_width="90dp"
+            android:layout_height="37dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="40dp"
+            android:text="Airsoft"
+            android:textSize="10sp" />
 
 
 
@@ -160,6 +201,35 @@
             android:text="End Time"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/Low9mmButton"
+            android:layout_width="100dp"
+            android:layout_height="37dp"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="40dp"
+            android:text="Low 9mm"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/Equal9mmButton"
+            android:layout_width="100dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="40dp"
+            android:text="9mm"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/High9mmButton"
+            android:layout_width="100dp"
+            android:layout_height="37dp"
+            android:layout_gravity="end|top"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="40dp"
+            android:text="High 9mm"
+            android:textSize="10sp" />
 
 
 
