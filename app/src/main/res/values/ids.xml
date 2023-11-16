@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="endTimeContainer" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="diffToParContainer" type="id" />
+    <item name="shotsContainer" type="id" />
+    <item name="avgSplitContainer" type="id" />
+    <item name="shotCountContainer" type="id" />
+    <item name="retryButton" type="id" />
+</resources>
