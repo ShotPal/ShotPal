@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ShotPal</string>
+    <string name="title_timer">Timer</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_settings">Settings</string>
+    <string name="start">Start</string>
+    <string name="par_time_seconds">Par Time (seconds)</string>
+    <string name="delay">Delay</string>
+    <string name="mode">Mode</string>
+    <string name="live_fire">Live Fire</string>
+    <string name="co2_dry">CO2 Dry</string>
+    <string name="dry_fire">Dry Fire</string>
+    <string name="airsoft">Airsoft</string>
+    <string name="end_time">End Time</string>
+    <string name="less_than_9mm"><![CDATA[< 9mm]]></string>
+    <string name="equal_to_9mm">9mm</string>
+    <string name="larger_than_9mm"><![CDATA[> 9mm]]></string>
+    <string name="retry">Retry</string>
+    <string name="diff_to_par">Diff to Par</string>
+    <string name="shots">Shots</string>
+    <string name="avg_split">Avg Split</string>
+    <string name="shots_count">Shots Count</string>
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+</resources>
