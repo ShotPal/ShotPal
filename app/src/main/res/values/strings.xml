@@ -26,4 +26,18 @@
     <string name="session_history">Session History</string>
     <string name="best_records">Best Records</string>
     <string name="profile_settings">Profile Settings</string>
+    <string name="sensitivity">Sensitivity</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="mic_only">Mic Only</string>
+    <string name="imu_only">IMU Only</string>
+    <string name="mic_imu">Mic + IMU</string>
+    <string name="tracking_mode">Tracking Mode</string>
+    <string name="imu_calibration">IMU calibration</string>
+    <string name="start_signal">Start Signal</string>
+    <string name="sound">Sound</string>
+    <string name="vibration">Vibration</string>
+    <string name="sound_vibration">Sound + Vibration</string>
+    <string name="reset_default_setting">Reset Default Setting</string>
 </resources>

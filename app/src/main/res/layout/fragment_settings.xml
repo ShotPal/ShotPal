@@ -6,6 +6,178 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.SettingsFragment">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/sensTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="116dp"
+            android:background="@drawable/textview_border"
+            android:text="@string/sensitivity"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/sensLowButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/low"
+                android:textAllCaps="false"
+                android:textOff="@string/low"
+                android:textOn="@string/low" />
+
+            <ToggleButton
+                android:id="@+id/sensMidButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/medium"
+                android:textAllCaps="false"
+                android:textOff="@string/medium"
+                android:textOn="@string/medium" />
+
+            <ToggleButton
+                android:id="@+id/sensHighButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/high"
+                android:textAllCaps="false"
+                android:textOff="@string/high"
+                android:textOn="@string/high" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/trackingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/textview_border"
+            android:text="@string/tracking_mode"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/micButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mic_only"
+                android:textAllCaps="false"
+                android:textOff="@string/mic_only"
+                android:textOn="@string/mic_only" />
+
+            <ToggleButton
+                android:id="@+id/imuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/imu_only"
+                android:textAllCaps="false"
+                android:textOff="@string/imu_only"
+                android:textOn="@string/imu_only" />
+
+            <ToggleButton
+                android:id="@+id/dualTrackingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/mic_imu"
+                android:textAllCaps="false"
+                android:textOff="@string/mic_imu"
+                android:textOn="@string/mic_imu" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/calibrationButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/imu_calibration" />
+
+        <TextView
+            android:id="@+id/signalTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/textview_border"
+            android:text="@string/start_signal"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/soundButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sound"
+                android:textAllCaps="false"
+                android:textOff="@string/sound"
+                android:textOn="@string/sound" />
+
+            <ToggleButton
+                android:id="@+id/vibrationButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vibration"
+                android:textAllCaps="false"
+                android:textOff="@string/vibration"
+                android:textOn="@string/vibration" />
+
+            <ToggleButton
+                android:id="@+id/dualSignalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sound_vibration"
+                android:textAllCaps="false"
+                android:textOff="@string/sound_vibration"
+                android:textOn="@string/sound_vibration" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reset_default_setting" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/usernameView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/example_username"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
@@ -19,4 +191,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
