@@ -22,4 +22,18 @@
         android:name="com.cs407.shotpal.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_retry"
+        android:name="com.cs407.shotpal.ui.timer.RetryFragment"
+        android:label="@string/title_timer"
+        tools:layout="@layout/fragment_retry" />
+
+    <fragment
+        android:id="@+id/navigation_stop"
+        android:name="com.cs407.shotpal.ui.timer.StopFragment"
+        android:label="@string/title_timer"
+        tools:layout="@layout/fragment_stop"/>
+
+
 </navigation>

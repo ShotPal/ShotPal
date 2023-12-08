@@ -1,9 +1,12 @@
 package com.cs407.shotpal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        // Find the button and set a click listener
+        Button startButton = findViewById(R.id.startButton);
+        startButton.setOnClickListener(v -> {
+            navController.navigate(R.id.navigation_stop); // Navigate to fragment_stop
+        });
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
