@@ -65,6 +65,7 @@
 
         <!-- TextView for End Time -->
         <TextView
+            android:id="@+id/timeCountingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -100,6 +101,7 @@
 
         <!-- TextView for Shots -->
         <TextView
+            android:id="@+id/recentShotTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -135,6 +137,7 @@
 
         <!-- TextView for Avg Split -->
         <TextView
+            android:id="@+id/splitTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -167,6 +170,7 @@
 
         <!-- TextView for Shot Count -->
         <TextView
+            android:id="@+id/shotCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
