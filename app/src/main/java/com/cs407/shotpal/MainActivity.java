@@ -70,10 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Find the button and set a click listener
         Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(v -> {
-            startTimer();
-            navController.navigate(R.id.navigation_stop); // Navigate to fragment_stop
-        });
+        startButton.setOnClickListener(this::onStartButtonClick);
+    }
+
+    public void onStartButtonClick(View view) {
+        // This method will be called when the start button is clicked
+        startTimer();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController.navigate(R.id.navigation_stop);
     }
 
     private Runnable soundLevelChecker = new Runnable() {
@@ -232,4 +236,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+
+        // Check the current destination and perform custom navigation if necessary
+        if (navController.getCurrentDestination() != null) {
+            int id = navController.getCurrentDestination().getId();
+            if (id == R.id.navigation_retry || id == R.id.navigation_stop) {
+                // Navigate to the main screen
+                navController.navigate(R.id.navigation_timer); // Use the actual ID of your main screen
+                return true;
+            }
+        }
+
+        return navController.navigateUp() || super.onSupportNavigateUp();
+    }
 }
