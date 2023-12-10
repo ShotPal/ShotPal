@@ -19,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaRecorder;
@@ -26,7 +27,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.AudioFormat;
+import android.media.AudioRecord;
 
 import com.cs407.shotpal.databinding.ActivityMainBinding;
 
@@ -59,21 +64,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         // Prompt the user to grant permission to record audio
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 0);
-        }
+        requestMicPremission();
 
         handler = new Handler();
 
-        // Start recording when the activity starts
-        startRecording();
 
         // Find the button and set a click listener
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(v -> {
             startTimer();
+            startRecording();
             navController.navigate(R.id.navigation_stop); // Navigate to fragment_stop
         });
+    }
+
+    private void requestMicPremission() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 0);
+        }
     }
 
     private Runnable soundLevelChecker = new Runnable() {
@@ -164,8 +172,9 @@ public class MainActivity extends AppCompatActivity {
         // Your existing code for starting the timer
     }
 
-    private void stopTimer() {
+    public void stopTimer() {
         // Your existing code for stopping the timer
+        stopRecording();
     }
 
     @Override
@@ -176,41 +185,92 @@ public class MainActivity extends AppCompatActivity {
 
     private void stopRecording() {
         if (isRecording) {
-            mediaRecorder.stop();
-            mediaRecorder.release();
-            mediaRecorder = null;
-            isRecording = false;
+            mAudioRecord.stop();
+            mAudioRecord.release();
+            mAudioRecord = null;
         }
     }
+
+    final int SAMPLE_RATE = 8000;
+    final int BUFFER_SIZE = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_PCM_16BIT);
+    AudioRecord mAudioRecord;
+    Object mLock;
+
+    double gunshotThreshold = 80.0;
 
 
     private void startRecording() {
         if (!isRecording) {
-            mediaRecorder = new MediaRecorder();
-            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-
-            // Specify a valid path for the output file in your app's internal storage directory
-            mediaRecorder.setOutputFile(getFilesDir().getAbsolutePath() + "/audio.3gp");
-
-
-            try {
-                mediaRecorder.prepare();
-                mediaRecorder.start();
-                isRecording = true;
-
-                // Schedule a task to check sound levels every second
-                handler.postDelayed(soundLevelChecker, 1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("Recording", "Error starting recording: " + e.getMessage());
+//            mediaRecorder = new MediaRecorder();
+//            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+//            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+//            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//
+//            // Specify a valid path for the output file in your app's internal storage directory
+//            mediaRecorder.setOutputFile(getFilesDir().getAbsolutePath() + "/audio.3gp");
+//
+//
+//            try {
+//                mediaRecorder.prepare();
+//                mediaRecorder.start();
+//                isRecording = true;
+//
+//                // Schedule a task to check sound levels every second
+//                handler.postDelayed(soundLevelChecker, 1000);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                Log.e("Recording", "Error starting recording: " + e.getMessage());
+//            }
+            if (isRecording) {
+                Log.e("AudioRecord", "Recording is current in progress");
+                return;
             }
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                requestMicPremission();
+            }
+            mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
+                    SAMPLE_RATE, AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_PCM_16BIT, BUFFER_SIZE);
+            if (mAudioRecord == null) {
+                Log.e("AudioRecord", "Failed to initialize Audio Recorder");
+                return;
+            }
+
+            isRecording = true;
+            mLock = new Object();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mAudioRecord.startRecording();
+                    short[] buffer = new short[BUFFER_SIZE];
+                    while (isRecording) {
+                        int reading = mAudioRecord.read(buffer, 0 , BUFFER_SIZE);
+                        long volume = 0;
+
+                        for (int i = 0; i < buffer.length; i++) {
+                            volume += buffer[i] * buffer[i];
+                        }
+
+                        double mean = volume / (double) reading;
+                        double actualDecibel = Math.log10(mean) * 10;
+                        Log.d("AudioRecorder", "decibel: " + actualDecibel);
+                        if (actualDecibel >= gunshotThreshold) {
+                            handleShotFired();
+                        }
+                        
+                        synchronized (mLock) {
+                            try {
+                                mLock.wait(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }).start();
+
         }
     }
-
-
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
