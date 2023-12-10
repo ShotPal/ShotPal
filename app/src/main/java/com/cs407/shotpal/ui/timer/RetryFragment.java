@@ -2,6 +2,8 @@ package com.cs407.shotpal.ui.timer;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -67,12 +69,18 @@ public class RetryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_retry, container, false);
 
         // Set up the button click listener
-        Button retryButton = view.findViewById(R.id.startButton);
+        Button retryButton = view.findViewById(R.id.retryButton);
         retryButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.navigation_stop); // Updated to navigate to fragment_retry
         });
 
+
+
         return view;
     }
+
+
+
+
 }

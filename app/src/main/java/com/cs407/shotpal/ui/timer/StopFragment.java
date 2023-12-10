@@ -2,6 +2,8 @@ package com.cs407.shotpal.ui.timer;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -65,6 +67,11 @@ public class StopFragment extends Fragment {
             navController.navigate(R.id.navigation_retry); // Updated to navigate to fragment_retry
         });
 
+
+
         return view;
     }
+
+
+
 }

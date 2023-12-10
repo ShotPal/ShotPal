@@ -27,7 +27,7 @@
 
     <!-- Retry Button -->
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
