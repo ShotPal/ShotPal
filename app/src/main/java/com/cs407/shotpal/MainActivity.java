@@ -1,6 +1,7 @@
 package com.cs407.shotpal;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -55,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        // Prompt the user to grant permission to record audio
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 0);
+        }
+
         handler = new Handler();
 
         // Start recording when the activity starts
@@ -65,13 +73,6 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(v -> {
             startTimer();
             navController.navigate(R.id.navigation_stop); // Navigate to fragment_stop
-        });
-
-        // Find the stop button and set a click listener
-        Button stopButton = findViewById(R.id.stopButton);
-        stopButton.setOnClickListener(v -> {
-            stopTimer();
-            // Add logic to save shot data or perform other actions on stopping the timer
         });
     }
 
