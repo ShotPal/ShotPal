@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(navView, navController);
 
         // Prompt the user to grant permission to record audio
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
@@ -71,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
         // Find the button and set a click listener
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(v -> {
+            Log.d("MainActivity", "Start button clicked");
             startTimer();
             navController.navigate(R.id.navigation_stop); // Navigate to fragment_stop
         });
     }
+
+
 
     private Runnable soundLevelChecker = new Runnable() {
         @Override
