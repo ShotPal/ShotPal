@@ -94,13 +94,16 @@ public class MainActivity extends AppCompatActivity {
                 int amplitude = mediaRecorder.getMaxAmplitude();
                 double soundLevel = 20 * Math.log10(amplitude / 32767.0);
 
-                // Adjust this threshold based on your testing and requirements
-                double gunshotThreshold = 80.0;
+                Log.d("SoundLevel", "Current sound level: " + soundLevel);
 
-                if (soundLevel > gunshotThreshold) {
-                    // Gunshot detected
+                // Adjust this threshold based on your testing and requirements
+                double gunshotThreshold = 0;
+
+                if (soundLevel == gunshotThreshold) {
+                    Log.d("GunshotDetection", "Gunshot detected! Sound level: " + soundLevel);
                     handleShotFired();
                 }
+
 
                 // Continue checking sound levels
                 handler.postDelayed(this, 1000);
