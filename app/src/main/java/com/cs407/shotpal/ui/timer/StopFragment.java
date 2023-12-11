@@ -1,77 +1,76 @@
 package com.cs407.shotpal.ui.timer;
-
 import android.os.Bundle;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import com.cs407.shotpal.MainActivity;
+
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.cs407.shotpal.R;
-import com.cs407.shotpal.databinding.ActivityMainBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RetryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StopFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Handler timerHandler = new Handler();
+    private Runnable updateTimerThread;
+    private long startTime;
+    private TextView timerTextView;
 
     public StopFragment() {
         // Required empty public constructor
     }
 
-
-    private ActivityMainBinding binding;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stop, container, false);
 
-        // Set up the button click listener
+        timerTextView = view.findViewById(R.id.timeCountingTextView); // This is the TextView to update with the timer
         Button stopButton = view.findViewById(R.id.stopButton);
+
+        // Start the timer when the Fragment view is created
+        startTime = SystemClock.elapsedRealtime();
+        startTimer();
+
         stopButton.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.navigation_retry); // Updated to navigate to fragment_retry
+            stopTimer();
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.navigation_retry);
         });
-
-
-
         return view;
     }
 
+    private void startTimer() {
+        updateTimerThread = new Runnable() {
+            public void run() {
+                long millisElapsed = SystemClock.elapsedRealtime() - startTime;
+                int seconds = (int) (millisElapsed / 1000);
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                timerTextView.setText(String.format("%02d:%02d", minutes, seconds));
+                timerHandler.postDelayed(this, 1000);
+            }
+        };
+        timerHandler.postDelayed(updateTimerThread, 0);
+    }
 
+    private void stopTimer() {
+        timerHandler.removeCallbacks(updateTimerThread);
+        // Reset the TextView when stopped if necessary
+        timerTextView.setText("00:00");
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        stopTimer();
+    }
 }

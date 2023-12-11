@@ -80,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
         navController.navigate(R.id.navigation_stop);
     }
 
+    public void onStopButtonClick(View view) {
+        // This method will be called when the stop button is clicked
+        stopTimer();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        navController.navigate(R.id.navigation_retry);
+    }
+
     private Runnable soundLevelChecker = new Runnable() {
         @Override
         public void run() {
