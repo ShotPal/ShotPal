@@ -23,6 +23,7 @@ public class StopFragment extends Fragment {
     private Runnable updateTimerThread;
     private long startTime;
     private TextView timerTextView;
+    private int shotCount;
 
     public StopFragment() {
         // Required empty public constructor
@@ -36,9 +37,13 @@ public class StopFragment extends Fragment {
         timerTextView = view.findViewById(R.id.timeCountingTextView); // This is the TextView to update with the timer
         Button stopButton = view.findViewById(R.id.stopButton);
 
+        //shot count is reset to zero
+
         // Start the timer when the Fragment view is created
         startTime = SystemClock.elapsedRealtime();
         startTimer();
+
+
 
         stopButton.setOnClickListener(v -> {
             stopTimer();

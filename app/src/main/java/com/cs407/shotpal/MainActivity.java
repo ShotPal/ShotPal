@@ -111,6 +111,25 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public static class UIHelper {
+
+        public static void updateUI(MainActivity mainActivity, long shotTime, long splitTime, long lastShotTime, int shotCount) {
+            mainActivity.updateUI(shotTime, splitTime, lastShotTime, shotCount);
+        }
+    }
+
+    private void handleLowSound() {
+        // Increment the shot count
+        shotCount++;
+
+        // Update UI in real-time
+        updateUI(0, 0, 0, shotCount);
+
+        // Store shot data (e.g., in shared preferences or database)
+        saveShotData(0, 0, 0, shotCount);
+    }
+
+
     private void handleShotFired() {
         if (!isShotFired) {
             isShotFired = true;
