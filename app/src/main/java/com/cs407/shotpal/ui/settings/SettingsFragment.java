@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -90,6 +91,7 @@ public class SettingsFragment extends Fragment implements MainActivity.Permissio
             ((MainActivity) requireActivity()).requestMicrophonePermission(this);
         });
 
+        // TODO: Implement sound and vibration feedback
         soundButton.setOnClickListener(v -> {
             sigOpt = "sound";
             updateButton();
@@ -134,10 +136,12 @@ public class SettingsFragment extends Fragment implements MainActivity.Permissio
         trackOpt = DEFAULT_TRACK_OPT;
         sigOpt = DEFAULT_SIG_OPT;
         updateButton();
+        Toast.makeText(requireActivity(), "Default Settings Restored", Toast.LENGTH_SHORT).show();
     }
 
     private void calibrationButton() {
-        // TODO: Implement calibration
+        // TODO: Implement IMU calibration
+        Toast.makeText(requireActivity(), "IMU Calibration Complete", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -10,51 +10,49 @@
         android:id="@+id/usernameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_margin="20dp"
         android:text="@string/example_username"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:menu="@menu/bottom_nav_menu" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usernameView">
 
         <Button
-            android:id="@+id/button_session_history"
+            android:id="@+id/sessionHistoryButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="0dp"
             android:text="@string/session_history"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button_best_records"
+            android:id="@+id/profileSettingsButton"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:text="@string/best_records"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/button_profile_settings"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
             android:gravity="center"
             android:text="@string/profile_settings"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

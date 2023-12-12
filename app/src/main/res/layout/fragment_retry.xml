@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.timer.RetryFragment">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- BottomNavigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
@@ -25,176 +15,191 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <!-- Retry Button -->
-    <Button
-        android:id="@+id/retryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="@string/retry"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/EndTimeContainer"
-        android:layout_width="204dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="2dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toStartOf="@+id/DiffToParContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TextView for End Time -->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/end_time"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
+            <FrameLayout
+                android:id="@+id/EndTimeContainer"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_rectangle"
+                app:layout_constraintEnd_toStartOf="@+id/DiffToParContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TextView for End Time -->
-        <TextView
-            android:id="@+id/endTimeTextView"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start|top"
+                    android:text="@string/end_time"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/endTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="05.14"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/DiffToParContainer"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_rectangle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start|top"
+                    android:text="@string/diff_to_par"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="-0.16"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ShotsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="2"
+            android:background="@drawable/black_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DiffToParContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/shots"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="TABLE WILL BE HERE"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/AvgSplitContainer"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_rectangle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ShotsContainer">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start|top"
+                    android:text="@string/avg_split"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="01.15"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/ShotCountContainer"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_rectangle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/AvgSplitContainer"
+                app:layout_constraintTop_toBottomOf="@+id/ShotsContainer">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start|top"
+                    android:text="@string/shots_count"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="2"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/retryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="05.14"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/DiffToParContainer"
-        android:layout_width="204dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- TextView for Diff to Par -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/diff_to_par"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Diff to Par -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="-0.16"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/ShotsContainer"
-        android:layout_width="410dp"
-        android:layout_height="159dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DiffToParContainer">
-
-        <!-- TextView for Shots -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/shots"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Shots -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="TABLE WILL BE HERE"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/AvgSplitContainer"
-        android:layout_width="204dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ShotsContainer">
-
-        <!-- TextView for Avg Split -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/avg_split"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Avg Split -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="01.15"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/ShotCountContainer"
-        android:layout_width="204dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/AvgSplitContainer"
-        app:layout_constraintTop_toBottomOf="@+id/ShotsContainer">
-
-        <!-- TextView for Shot Count -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/shots_count"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Shot Count -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="2"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-    </FrameLayout>
+            android:layout_marginTop="20dp"
+            android:text="@string/retry" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

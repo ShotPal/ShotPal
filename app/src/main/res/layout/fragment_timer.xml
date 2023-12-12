@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.timer.TimerFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- BottomNavigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
@@ -39,202 +15,211 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <!-- Retry Button -->
-    <Button
-        android:id="@+id/startButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="@string/start"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/ParTimeContainer"
-        android:layout_width="408dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/black_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TextView for Par Time -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/par_time_seconds"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+        <FrameLayout
+            android:id="@+id/ParTimeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/black_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TextView for Par Time -->
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/par_time_seconds"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="3.0"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/DelayContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="2"
+            android:background="@drawable/black_rectangle"
+            app:layout_constraintEnd_toStartOf="@+id/ModeContainer"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ParTimeContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/delay"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="3 - 5s"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/ModeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="3"
+            android:background="@drawable/black_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ParTimeContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/mode"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/LiveFireButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/live_fire"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/DryFireButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/dry_fire"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/CO2DryButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/co2_dry"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/AirsoftButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/airsoft"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/AmmoCaliberContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="3"
+            android:background="@drawable/black_rectangle"
+            app:layout_constraintBottom_toTopOf="@+id/startButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DelayContainer">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/ammo_caliber"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/Low9mmButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/less_than_9mm"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/Equal9mmButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/equal_to_9mm"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/High9mmButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/larger_than_9mm"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/startButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="3.0"
-            android:textColor="@android:color/black"
-            android:textSize="36sp" />
-    </FrameLayout>
+            android:layout_marginTop="20dp"
+            android:text="@string/start" />
+    </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/DelayContainer"
-        android:layout_width="200dp"
-        android:layout_height="172dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toStartOf="@+id/ModeContainer"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ParTimeContainer">
-
-        <!-- TextView for Delay -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/delay"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Delay -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="3 - 5s"
-            android:textColor="@android:color/black"
-            android:textSize="36sp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/ModeContainer"
-        android:layout_width="200dp"
-        android:layout_height="172dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ParTimeContainer">
-
-        <!-- TextView for Mode -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/mode"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/LiveFireButton"
-            android:layout_width="90dp"
-            android:layout_height="37dp"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/live_fire"
-            android:textSize="11sp" />
-
-        <Button
-            android:id="@+id/CO2DryButton"
-            android:layout_width="90dp"
-            android:layout_height="37dp"
-            android:layout_gravity="start|bottom"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="40dp"
-            android:text="@string/co2_dry"
-            android:textSize="11sp" />
-
-        <Button
-            android:id="@+id/DryFireButton"
-            android:layout_width="90dp"
-            android:layout_height="37dp"
-            android:layout_gravity="end|top"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/dry_fire"
-            android:textSize="11sp" />
-
-        <Button
-            android:id="@+id/AirsoftButton"
-            android:layout_width="90dp"
-            android:layout_height="37dp"
-            android:layout_gravity="end|bottom"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="40dp"
-            android:text="@string/airsoft"
-            android:textSize="11sp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/AmmoCaliberContainer"
-        android:layout_width="407dp"
-        android:layout_height="97dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintBottom_toTopOf="@+id/startButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DelayContainer">
-
-        <!-- TextView for Ammo caliber -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="@string/end_time"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/Low9mmButton"
-            android:layout_width="100dp"
-            android:layout_height="37dp"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:text="@string/less_than_9mm"
-            android:textSize="11sp" />
-
-        <Button
-            android:id="@+id/Equal9mmButton"
-            android:layout_width="100dp"
-            android:layout_height="37dp"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="40dp"
-            android:text="@string/equal_to_9mm"
-            android:textSize="11sp" />
-
-        <Button
-            android:id="@+id/High9mmButton"
-            android:layout_width="100dp"
-            android:layout_height="37dp"
-            android:layout_gravity="end|top"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/larger_than_9mm"
-            android:textSize="11sp" />
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

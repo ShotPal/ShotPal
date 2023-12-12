@@ -43,10 +43,8 @@ public class StopFragment extends Fragment {
 
         stopButton.setOnClickListener(v -> {
             stopTimer();
-
             // Reset shotCount to 0 when moving to retry fragment
             shotCount = 0;
-
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.navigation_retry);
         });
@@ -57,6 +55,10 @@ public class StopFragment extends Fragment {
         }
 
         return view;
+    }
+
+    public void startDetection() {
+        startTimer();
     }
 
     @Override

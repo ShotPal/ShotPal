@@ -40,4 +40,5 @@
     <string name="vibration">Vibration</string>
     <string name="sound_vibration">Sound + Vibration</string>
     <string name="reset_default_setting">Reset Default Setting</string>
+    <string name="ammo_caliber">Ammo Caliber</string>
 </resources>
