@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private long lastShotTime = 0L;
     private int shotCount = 0;
 
-    public ArrayList<shotClass> shotList = new ArrayList<shotClass>();
+    public static ArrayList<shotClass> shotList = new ArrayList<shotClass>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,21 +126,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-
-//    private void handleShotFired() {
-//        long shotTime = System.currentTimeMillis() - startTime;
-//        long splitTime = startTime - lastShotTime;
-//
-//        // Update shot count and last shot time
-//        shotCount++;
-//        lastShotTime = startTime;
-//
-//        // Store shot data (e.g., in shared preferences or database)
-//        saveShotData(shotTime, splitTime, lastShotTime, shotCount);
-//
-//        // Update UI in real-time
-//        updateUI(shotTime, splitTime, lastShotTime, shotCount);
-//    }
 
     private void handleShotFired() {
         // currentTimeMillis is now from the system boot time (elapsed realtime)

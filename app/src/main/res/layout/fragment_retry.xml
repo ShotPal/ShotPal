@@ -119,14 +119,28 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/shotsTableTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/no_shots_detected"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="30dp">
+
+                <LinearLayout
+                    android:id="@+id/shotsTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/shotsTableText0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/no_shots_detected"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </ScrollView>
+
         </FrameLayout>
 
         <LinearLayout

@@ -100,24 +100,22 @@ public class StopFragment extends Fragment {
                 double actualDecibel = Math.log10(mean) * 10;
 //                    Log.d("AudioRecorder", "decibel: " + actualDecibel);
 
-                boolean isShot = false;
                 if (actualDecibel >= 40) {
                     long shotTime = SystemClock.elapsedRealtime() - startTime;
-                    if (((MainActivity) requireActivity()).shotList.size() == 0) {
+                    if (MainActivity.shotList.size() == 0) {
                         Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
-                        ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime, 0));
-                        ((MainActivity) requireActivity()).updateUI(shotTime, 0, shotTime, ((MainActivity) requireActivity()).shotList.size());
+                        MainActivity.shotList.add(new shotClass(shotTime, 0));
+                        updateUI(shotTime, 0, MainActivity.shotList.size());
                     } else {
-                        shotClass lastShot = ((MainActivity) requireActivity()).shotList.get(((MainActivity) requireActivity()).shotList.size() - 1);
+                        shotClass lastShot = MainActivity.shotList.get(MainActivity.shotList.size() - 1);
                         if (shotTime - lastShot.getShotTime() > 500) {
                             long splitTime = shotTime - lastShot.getShotTime();
-                            ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime, splitTime));
+                            MainActivity.shotList.add(new shotClass(shotTime, splitTime));
                             Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
-                            ((MainActivity) requireActivity()).updateUI(shotTime, splitTime, shotTime, ((MainActivity) requireActivity()).shotList.size());
+                            updateUI(shotTime, splitTime, MainActivity.shotList.size());
                         }
                     }
                 }
-
 
                 synchronized (mLock) {
                     try {
@@ -129,6 +127,27 @@ public class StopFragment extends Fragment {
             }
         }).start();
 
+    }
+
+    public void updateUI(long shotTime, long splitTime, int shotCount) {
+        requireActivity().runOnUiThread(() -> {
+            TextView recentShotTimeTextView = requireView().findViewById(R.id.recentShotTimeTextView);
+            TextView splitTimeTextView = requireView().findViewById(R.id.splitTimeTextView);
+            TextView shotCountTextView = requireView().findViewById(R.id.shotCountTextView);
+
+            recentShotTimeTextView.setText(formatTime(shotTime));
+            splitTimeTextView.setText(formatTime(splitTime));
+            shotCountTextView.setText(String.valueOf(shotCount));
+        });
+    }
+
+    private String formatTime(long timeInMillis) {
+        Log.d("Time", "Time in milliseconds: " + timeInMillis);
+        // Format time as minutes and seconds
+        int seconds = (int) (timeInMillis / 1000);
+        int minutes = seconds / 60;
+        seconds = seconds % 60;
+        return String.format("%02d:%02d", minutes, seconds);
     }
 
     @Override

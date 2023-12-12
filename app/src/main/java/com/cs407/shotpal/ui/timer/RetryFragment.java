@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.cs407.shotpal.MainActivity;
 import com.cs407.shotpal.R;
+import com.cs407.shotpal.shotClass;
 
 public class RetryFragment extends Fragment {
 
@@ -51,11 +53,17 @@ public class RetryFragment extends Fragment {
         }
 
         Button retryButton = view.findViewById(R.id.retryButton);
-        retryButton.setOnClickListener(v -> {
-            ((MainActivity) requireActivity()).randomSignal(TimerFragment.lowerBoundInt, TimerFragment.upperBoundInt);
-        });
+        retryButton.setOnClickListener(v -> ((MainActivity) requireActivity()).randomSignal(TimerFragment.lowerBoundInt, TimerFragment.upperBoundInt));
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        LinearLayout shotsTable = view.findViewById(R.id.shotsTable);
+
+        for (shotClass shot : MainActivity.shotList) {
+            TextView shotTextView = new TextView(requireContext());
+            shotTextView.setText(shot.toString());
+            shotsTable.addView(shotTextView);
+        }
 
         return view;
     }
