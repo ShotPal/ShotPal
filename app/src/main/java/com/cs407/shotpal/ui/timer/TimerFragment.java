@@ -1,11 +1,16 @@
 package com.cs407.shotpal.ui.timer;
 
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,6 +29,8 @@ public class TimerFragment extends Fragment implements MainActivity.PermissionLi
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTimerBinding.inflate(inflater, container, false);
+        View view = inflater.inflate(R.layout.fragment_stop, container, false);
+
 
         Button startButton = binding.startButton;
         startButton.setOnClickListener(v -> {
@@ -40,6 +47,21 @@ public class TimerFragment extends Fragment implements MainActivity.PermissionLi
     @Override
     public void onPermissionGranted() {
         goToStopFragment();
+    }
+
+    private void randomSignal(int lowerBound, int upperBound) {
+        double delayTime = Math.random() * (upperBound - lowerBound) + lowerBound;
+        Toast.makeText(requireActivity(), "StandBy...", Toast.LENGTH_SHORT).show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,500);
+            }
+        }, (long) delayTime);
+
     }
 
     @Override

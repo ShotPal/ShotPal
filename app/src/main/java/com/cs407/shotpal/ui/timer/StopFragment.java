@@ -103,11 +103,12 @@ public class StopFragment extends Fragment {
                     long shotTime = SystemClock.elapsedRealtime() - startTime;
                     if (((MainActivity) requireActivity()).shotList.size() == 0) {
                         Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
-                        ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
+                        ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime, 0));
                     } else {
                         shotClass lastShot = ((MainActivity) requireActivity()).shotList.get(((MainActivity) requireActivity()).shotList.size() - 1);
                         if (shotTime - lastShot.getShotTime() > 500) {
-                            ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
+                            long splitTime = shotTime - lastShot.getShotTime();
+                            ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime, splitTime));
                             Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
                         }
                     }
