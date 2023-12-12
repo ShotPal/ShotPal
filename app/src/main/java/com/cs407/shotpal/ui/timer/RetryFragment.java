@@ -1,15 +1,18 @@
 package com.cs407.shotpal.ui.timer;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.cs407.shotpal.R;
 
 public class RetryFragment extends Fragment {
@@ -58,7 +61,6 @@ public class RetryFragment extends Fragment {
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-
         return view;
     }
 
@@ -69,4 +71,5 @@ public class RetryFragment extends Fragment {
         int minutes = seconds / 60;
         seconds = seconds % 60;
         return String.format("%02d:%02d", minutes, seconds);
-    }}
+    }
+}
