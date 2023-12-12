@@ -94,13 +94,14 @@ public class MainActivity extends AppCompatActivity {
                 int amplitude = mediaRecorder.getMaxAmplitude();
                 double soundLevel = 20 * Math.log10(amplitude / 32767.0);
 
-                Log.d("SoundLevel", "Current sound level: " + soundLevel);
+//                Log.d("SoundLevel", "Current sound level: " + soundLevel);
 
                 // Adjust this threshold based on your testing and requirements
                 double gunshotThreshold = 0;
 
                 if (soundLevel == gunshotThreshold) {
                     Log.d("GunshotDetection", "Gunshot detected! Sound level: " + soundLevel);
+                    Log.d("GunshotDetection", "Amplitude: " + amplitude);
                     handleShotFired();
                 }
 
@@ -111,47 +112,60 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public static class UIHelper {
-
-        public static void updateUI(MainActivity mainActivity, long shotTime, long splitTime, long lastShotTime, int shotCount) {
-            mainActivity.updateUI(shotTime, splitTime, lastShotTime, shotCount);
-        }
-    }
-
-    private void handleLowSound() {
-        // Increment the shot count
-        shotCount++;
-
-        // Update UI in real-time
-        updateUI(0, 0, 0, shotCount);
-
-        // Store shot data (e.g., in shared preferences or database)
-        saveShotData(0, 0, 0, shotCount);
-    }
-
+//    public static class UIHelper {
+//
+//        public static void updateUI(MainActivity mainActivity, long shotTime, long splitTime, long lastShotTime, int shotCount) {
+//            mainActivity.updateUI(shotTime, splitTime, lastShotTime, shotCount);
+//        }
+//    }
+//
+//    private void handleLowSound() {
+//        // Increment the shot count
+//        shotCount++;
+//
+//        // Update UI in real-time
+//        updateUI(0, 0, 0, shotCount);
+//
+//        // Store shot data (e.g., in shared preferences or database)
+//        saveShotData(0, 0, 0, shotCount);
+//    }
+//
 
     private void handleShotFired() {
-        if (!isShotFired) {
-            isShotFired = true;
-            startTime = System.currentTimeMillis();
-        } else {
-            // Calculate shot time and split time
-            long shotTime = System.currentTimeMillis() - startTime;
-            long splitTime = startTime - lastShotTime;
+//        if (!isShotFired) {
+//            isShotFired = true;
+//            startTime = System.currentTimeMillis();
+//        } else {
+//            // Calculate shot time and split time
+//            long shotTime = System.currentTimeMillis() - startTime;
+//            long splitTime = startTime - lastShotTime;
+//
+//            // Update shot count and last shot time
+//            shotCount++;
+//            lastShotTime = startTime;
+//
+//            // Store shot data (e.g., in shared preferences or database)
+//            saveShotData(shotTime, splitTime, lastShotTime, shotCount);
+//
+//            // Update UI in real-time
+//            updateUI(shotTime, splitTime, lastShotTime, shotCount);
+//
+//            // Reset shot-fired flag
+//            isShotFired = false;
+//        }
+        long shotTime = System.currentTimeMillis() - startTime;
+        long splitTime = startTime - lastShotTime;
 
-            // Update shot count and last shot time
-            shotCount++;
-            lastShotTime = startTime;
+        // Update shot count and last shot time
+        shotCount++;
+        lastShotTime = startTime;
 
-            // Store shot data (e.g., in shared preferences or database)
-            saveShotData(shotTime, splitTime, lastShotTime, shotCount);
 
-            // Update UI in real-time
-            updateUI(shotTime, splitTime, lastShotTime, shotCount);
+        // Store shot data (e.g., in shared preferences or database)
+        saveShotData(shotTime, splitTime, lastShotTime, shotCount);
 
-            // Reset shot-fired flag
-            isShotFired = false;
-        }
+        // Update UI in real-time
+        updateUI(shotTime, splitTime, lastShotTime, shotCount);
     }
 
     private void saveShotData(long shotTime, long splitTime, long lastShotTime, int shotCount) {
@@ -179,19 +193,21 @@ public class MainActivity extends AppCompatActivity {
         TextView shotCountTextView = findViewById(R.id.shotCountTextView);
 
         // Update the UI with shot details
-        timeCountingTextView.setText(formatTime(shotTime));
-        recentShotTimeTextView.setText(formatTime(lastShotTime));
+//        timeCountingTextView.setText(formatTime(shotTime));
+        recentShotTimeTextView.setText(formatTime(shotTime));
         splitTimeTextView.setText(formatTime(splitTime));
         shotCountTextView.setText(String.valueOf(shotCount));
     }
 
     private String formatTime(long timeInMillis) {
+        Log.d("Time", "Time in milliseconds: " + timeInMillis);
         // Format time as minutes and seconds
         int seconds = (int) (timeInMillis / 1000);
         int minutes = seconds / 60;
         seconds = seconds % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
+
 
     private void startTimer() {
         // Your existing code for starting the timer
