@@ -41,15 +41,12 @@
     <FrameLayout
         android:id="@+id/UsernameContainer"
         android:layout_width="410dp"
-        android:layout_height="0dp"
+        android:layout_height="131dp"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="169dp"
         android:background="@drawable/black_rectangle"
-        app:layout_constraintBottom_toTopOf="@+id/SplitTimeContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- TextView for End Time -->
         <TextView
@@ -80,9 +77,8 @@
         android:id="@+id/RecentShotContainer"
         android:layout_width="410dp"
         android:layout_height="159dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/black_rectangle"
-        app:layout_constraintBottom_toTopOf="@+id/ShotCountContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UsernameContainer">
@@ -113,15 +109,12 @@
 
     <FrameLayout
         android:id="@+id/SplitTimeContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="226dp"
+        android:layout_width="204dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/black_rectangle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ShotCountContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernameContainer">
+        app:layout_constraintTop_toBottomOf="@+id/RecentShotContainer">
 
         <!-- TextView for Avg Split -->
         <TextView
@@ -151,10 +144,12 @@
         android:id="@+id/ShotCountContainer"
         android:layout_width="204dp"
         android:layout_height="128dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/black_rectangle"
-        app:layout_constraintBottom_toBottomOf="@+id/SplitTimeContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SplitTimeContainer">
+        app:layout_constraintStart_toEndOf="@+id/SplitTimeContainer"
+        app:layout_constraintTop_toBottomOf="@+id/RecentShotContainer">
 
         <!-- TextView for Shot Count -->
         <TextView
