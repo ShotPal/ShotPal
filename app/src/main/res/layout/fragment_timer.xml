@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="3.0"
+                android:text="@string/zero_decimal"
                 android:textColor="@android:color/black"
                 android:textSize="36sp" />
         </FrameLayout>
@@ -78,13 +78,57 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:text="3 - 5s"
-                android:textColor="@android:color/black"
-                android:textSize="36sp" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/lowerEditTextNumberDecimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:ems="2"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textSize="36sp"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/to"
+                    android:textColor="@android:color/black"
+                    android:textSize="36sp" />
+
+                <EditText
+                    android:id="@+id/higherEditTextNumberDecimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:ems="2"
+                    android:gravity="center"
+                    android:inputType="numberDecimal"
+                    android:textSize="36sp"
+                    tools:ignore="LabelFor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/s"
+                    android:textColor="@android:color/black"
+                    android:textSize="36sp" />
+            </LinearLayout>
+
         </FrameLayout>
 
         <FrameLayout

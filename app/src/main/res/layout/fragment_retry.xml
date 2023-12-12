@@ -27,20 +27,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
             <FrameLayout
                 android:id="@+id/EndTimeContainer"
                 android:layout_width="0dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_rectangle"
                 app:layout_constraintEnd_toStartOf="@+id/DiffToParContainer"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -58,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="05.14"
+                    android:text="@string/zero_time"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </FrameLayout>
@@ -66,7 +68,7 @@
             <FrameLayout
                 android:id="@+id/DiffToParContainer"
                 android:layout_width="0dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_rectangle"
@@ -85,10 +87,11 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/diffToParTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="-0.16"
+                    android:text="@string/zero_time"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </FrameLayout>
@@ -117,30 +120,33 @@
                 android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/shotsTableTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="TABLE WILL BE HERE"
+                android:text="@string/no_shots_detected"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="20dp"
+            android:layout_weight="1"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
             <FrameLayout
                 android:id="@+id/AvgSplitContainer"
                 android:layout_width="0dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_rectangle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ShotsContainer">
+                app:layout_constraintTop_toBottomOf="@+id/ShotsContainer"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -154,18 +160,19 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/avgSplitTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="01.15"
+                    android:text="@string/zero_time"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/ShotCountContainer"
+                android:id="@+id/ShotsCountContainer"
                 android:layout_width="0dp"
-                android:layout_height="128dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/black_rectangle"
@@ -185,10 +192,11 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/shotsCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="2"
+                    android:text="@string/zero"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </FrameLayout>

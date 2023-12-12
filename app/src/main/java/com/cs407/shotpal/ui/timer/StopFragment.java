@@ -1,8 +1,6 @@
 package com.cs407.shotpal.ui.timer;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -17,7 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -79,57 +76,48 @@ public class StopFragment extends Fragment {
 
     @SuppressLint("MissingPermission")
     public void startDetection() {
-//        startTimer();
-//        ((MainActivity) requireActivity()).startRecording();
         if (isRecording) {
             Log.e("AudioRecord", "Recording is current in progress");
             return;
         }
         mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 SAMPLE_RATE, AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_PCM_16BIT, BUFFER_SIZE);
-        if (mAudioRecord == null) {
-            Log.e("AudioRecord", "Failed to initialize Audio Recorder");
-            return;
-        }
 
         isRecording = true;
         mLock = new Object();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mAudioRecord.startRecording();
-                short[] buffer = new short[BUFFER_SIZE];
-                while (isRecording) {
-                    int reading = mAudioRecord.read(buffer, 0 , BUFFER_SIZE);
-                    long volume = 0;
+        new Thread(() -> {
+            mAudioRecord.startRecording();
+            short[] buffer = new short[BUFFER_SIZE];
+            while (isRecording) {
+                int reading = mAudioRecord.read(buffer, 0, BUFFER_SIZE);
+                long volume = 0;
 
-                    for (int i = 0; i < buffer.length; i++) {
-                        volume += buffer[i] * buffer[i];
-                    }
+                for (short value : buffer) {
+                    volume += value * value;
+                }
 
-                    double mean = volume / (double) reading;
-                    double actualDecibel = Math.log10(mean) * 10;
+                double mean = volume / (double) reading;
+                double actualDecibel = Math.log10(mean) * 10;
 //                    Log.d("AudioRecorder", "decibel: " + actualDecibel);
-                    if (actualDecibel >= 40) {
-                        long shotTime = SystemClock.elapsedRealtime() - startTime;
-                        if (((MainActivity) requireActivity()).shotList.size() == 0) {
-                            Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
+                if (actualDecibel >= 40) {
+                    long shotTime = SystemClock.elapsedRealtime() - startTime;
+                    if (((MainActivity) requireActivity()).shotList.size() == 0) {
+                        Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
+                        ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
+                    } else {
+                        shotClass lastShot = ((MainActivity) requireActivity()).shotList.get(((MainActivity) requireActivity()).shotList.size() - 1);
+                        if (shotTime - lastShot.getShotTime() > 500) {
                             ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
-                        } else {
-                            shotClass lastShot = ((MainActivity) requireActivity()).shotList.get(((MainActivity) requireActivity()).shotList.size() - 1);
-                            if (shotTime - lastShot.getShotTime() > 100) {
-                                ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
-                                Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
-                            }
+                            Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
                         }
                     }
+                }
 
-                    synchronized (mLock) {
-                        try {
-                            mLock.wait(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                synchronized (mLock) {
+                    try {
+                        mLock.wait(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
@@ -160,7 +148,7 @@ public class StopFragment extends Fragment {
 
     private void stopTimer() {
         timerHandler.removeCallbacks(updateTimerThread);
-        timerTextView.setText("00:00");
+        timerTextView.setText("00:00.000");
     }
 
     @Override

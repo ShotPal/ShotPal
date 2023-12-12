@@ -45,5 +45,10 @@
     <string name="recent_shot">Recent Shot</string>
     <string name="split_time">Split Time</string>
     <string name="stop">Stop</string>
-    <string name="shot_count">Shot Count</string>
+    <string name="zero">0</string>
+    <string name="zero_decimal">0.0</string>
+    <string name="no_shots_detected">No Shots Detected</string>
+    <string name="zero_time">00:00.000</string>
+    <string name="to">-</string>
+    <string name="s">s</string>
 </resources>

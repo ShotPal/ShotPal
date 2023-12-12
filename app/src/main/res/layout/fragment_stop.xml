@@ -26,38 +26,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
-            android:id="@+id/TimeCountingContainer"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/black_rectangle">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|top"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:gravity="start|top"
-                android:text="@string/time_counting"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/timeCountingTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="05.14"
-                android:textColor="@android:color/black"
-                android:textSize="48sp" />
-        </FrameLayout>
-
-        <FrameLayout
             android:id="@+id/RecentShotContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:background="@drawable/black_rectangle">
 
@@ -77,7 +48,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="03.14"
+                android:text="@string/zero_time"
+                android:textColor="@android:color/black"
+                android:textSize="48sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/TimeCountingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="2"
+            android:background="@drawable/black_rectangle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/time_counting"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/timeCountingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/zero_time"
                 android:textColor="@android:color/black"
                 android:textSize="48sp" />
         </FrameLayout>
@@ -87,8 +87,8 @@
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <FrameLayout
                 android:id="@+id/SplitTimeContainer"
@@ -96,7 +96,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
                 android:layout_weight="1"
-                android:background="@drawable/black_rectangle">
+                android:background="@drawable/black_rectangle"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,13 +115,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="01.14"
+                    android:text="@string/zero_time"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/ShotCountContainer"
+                android:id="@+id/ShotsCountContainer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
@@ -134,7 +135,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="start|top"
-                    android:text="@string/shot_count"
+                    android:text="@string/shots_count"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
@@ -143,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </FrameLayout>
