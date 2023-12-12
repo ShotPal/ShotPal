@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private long lastShotTime = 0L;
     private int shotCount = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,34 +52,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-
         // Prompt the user to grant permission to record audio
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 0);
         }
 
         handler = new Handler();
-
-        // Start recording when the activity starts
-        startRecording();
-
-        // Find the button and set a click listener
-        Button startButton = findViewById(R.id.startButton);
-        startButton.setOnClickListener(this::onStartButtonClick);
-    }
-
-    public void onStartButtonClick(View view) {
-        // This method will be called when the start button is clicked
-        startTimer();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        navController.navigate(R.id.navigation_stop);
-    }
-
-    public void onStopButtonClick(View view) {
-        // This method will be called when the stop button is clicked
-        stopTimer();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        navController.navigate(R.id.navigation_retry);
     }
 
     private Runnable soundLevelChecker = new Runnable() {
@@ -102,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("GunshotDetection", "Amplitude: " + amplitude);
                     handleShotFired();
                 }
-
 
                 // Continue checking sound levels
                 handler.postDelayed(this, 1000);
@@ -183,17 +157,6 @@ public class MainActivity extends AppCompatActivity {
         return String.format("%02d:%02d", minutes, seconds);
     }
 
-
-    private void startTimer() {
-        // Save the start time when the user starts the stopwatch
-        startTime = SystemClock.elapsedRealtime();
-        // If you have any thread or handler for updating UI or logic related to starting the timer, initialize it here
-    }
-
-    private void stopTimer() {
-        // Your existing code for stopping the timer
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -208,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
             isRecording = false;
         }
     }
-
 
     private void startRecording() {
         if (!isRecording) {
@@ -234,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
