@@ -87,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 int amplitude = mediaRecorder.getMaxAmplitude();
                 double soundLevel = 20 * Math.log10(amplitude / 32767.0);
 
-//                Log.d("SoundLevel", "Current sound level: " + soundLevel);
+                Log.d("SoundLevel", "Current sound level: " + soundLevel);
 
                 // Adjust this threshold based on your testing and requirements
-                double gunshotThreshold = 0;
+                double gunshotThreshold = -10.0;
 
-                if (soundLevel == gunshotThreshold) {
+                if (soundLevel >= gunshotThreshold) {
                     Log.d("GunshotDetection", "Gunshot detected! Sound level: " + soundLevel);
                     Log.d("GunshotDetection", "Amplitude: " + amplitude);
                     handleShotFired();
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void startRecording() {
+    public void startRecording() {
         if (!isRecording) {
             mediaRecorder = new MediaRecorder();
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);

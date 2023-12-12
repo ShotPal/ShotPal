@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.cs407.shotpal.MainActivity;
 import com.cs407.shotpal.R;
 
 public class StopFragment extends Fragment {
@@ -41,6 +42,8 @@ public class StopFragment extends Fragment {
         startTime = SystemClock.elapsedRealtime();
         startTimer();
 
+        startDetection();
+
         stopButton.setOnClickListener(v -> {
             stopTimer();
             // Reset shotCount to 0 when moving to retry fragment
@@ -59,6 +62,7 @@ public class StopFragment extends Fragment {
 
     public void startDetection() {
         startTimer();
+        ((MainActivity) requireActivity()).startRecording();
     }
 
     @Override
