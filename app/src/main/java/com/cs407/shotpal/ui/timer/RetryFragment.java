@@ -1,17 +1,16 @@
 package com.cs407.shotpal.ui.timer;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.cs407.shotpal.R;
 
@@ -43,8 +42,6 @@ public class RetryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_retry, container, false);
 
-        Button retryButton = view.findViewById(R.id.retryButton);
-
         Bundle args = getArguments();
         if (args != null) {
             long endTime = args.getLong("endTime", 0);
@@ -54,6 +51,7 @@ public class RetryFragment extends Fragment {
             endTimeTextView.setText(formatTime(endTime));
         }
 
+        Button retryButton = view.findViewById(R.id.retryButton);
         retryButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.navigation_stop);

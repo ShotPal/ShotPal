@@ -13,19 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.cs407.shotpal.MainActivity;
 import com.cs407.shotpal.R;
 import com.cs407.shotpal.databinding.FragmentSettingsBinding;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements MainActivity.PermissionListener {
 
     private FragmentSettingsBinding binding;
 
     private SharedPreferences sharedPreferences;
-    String sensOpt, trackOpt, sigOpt;
+    String sensOpt, trackOpt, targetTrackOpt, sigOpt;
 
-    static final String DEFAULT_SENS_OPT = "medium";
-    static final String DEFAULT_TRACK_OPT = "dual";
-    static final String DEFAULT_SIG_OPT = "dual";
+    public static final String DEFAULT_SENS_OPT = "medium";
+    public static final String DEFAULT_TRACK_OPT = "dual";
+    public static final String DEFAULT_SIG_OPT = "dual";
 
     ToggleButton sensLowButton, sensMidButton, sensHighButton;
     ToggleButton micButton, imuButton, dualTrackingButton;
@@ -77,16 +78,16 @@ public class SettingsFragment extends Fragment {
         });
 
         micButton.setOnClickListener(v -> {
-            trackOpt = "mic";
-            updateButton();
+            targetTrackOpt = "mic";
+            ((MainActivity) requireActivity()).requestMicrophonePermission(this);
         });
         imuButton.setOnClickListener(v -> {
             trackOpt = "imu";
             updateButton();
         });
         dualTrackingButton.setOnClickListener(v -> {
-            trackOpt = "dual";
-            updateButton();
+            targetTrackOpt = "dual";
+            ((MainActivity) requireActivity()).requestMicrophonePermission(this);
         });
 
         soundButton.setOnClickListener(v -> {
@@ -143,5 +144,17 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onPermissionGranted() {
+        trackOpt = targetTrackOpt;
+        updateButton();
+    }
+
+    @Override
+    public void onPermissionDenied() {
+        trackOpt = "imu";
+        updateButton();
     }
 }

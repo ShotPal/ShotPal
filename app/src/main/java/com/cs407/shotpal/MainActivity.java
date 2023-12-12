@@ -13,9 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -52,12 +52,32 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        // Prompt the user to grant permission to record audio
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 0);
-        }
-
         handler = new Handler();
+    }
+
+    private PermissionListener permissionListener;
+
+    public interface PermissionListener {
+        void onPermissionGranted();
+
+        void onPermissionDenied();
+    }
+
+    public void requestMicrophonePermission(PermissionListener listener) {
+        this.permissionListener = listener;
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                permissionListener.onPermissionGranted();
+            } else {
+                permissionListener.onPermissionDenied();
+            }
+        }
     }
 
     private Runnable soundLevelChecker = new Runnable() {
@@ -83,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-
 
 //    private void handleShotFired() {
 //        long shotTime = System.currentTimeMillis() - startTime;
