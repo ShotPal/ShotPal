@@ -24,6 +24,7 @@ import androidx.navigation.Navigation;
 
 import com.cs407.shotpal.MainActivity;
 import com.cs407.shotpal.R;
+import com.cs407.shotpal.shotClass;
 
 public class StopFragment extends Fragment {
 
@@ -108,9 +109,19 @@ public class StopFragment extends Fragment {
 
                     double mean = volume / (double) reading;
                     double actualDecibel = Math.log10(mean) * 10;
-                    Log.d("AudioRecorder", "decibel: " + actualDecibel);
+//                    Log.d("AudioRecorder", "decibel: " + actualDecibel);
                     if (actualDecibel >= 40) {
-                        Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel);
+                        long shotTime = SystemClock.elapsedRealtime() - startTime;
+                        if (((MainActivity) requireActivity()).shotList.size() == 0) {
+                            Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
+                            ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
+                        } else {
+                            shotClass lastShot = ((MainActivity) requireActivity()).shotList.get(((MainActivity) requireActivity()).shotList.size() - 1);
+                            if (shotTime - lastShot.getShotTime() > 100) {
+                                ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime));
+                                Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
+                            }
+                        }
                     }
 
                     synchronized (mLock) {

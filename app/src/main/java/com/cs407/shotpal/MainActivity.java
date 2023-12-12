@@ -24,6 +24,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.cs407.shotpal.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private long startTime = 0L;
     private long lastShotTime = 0L;
     private int shotCount = 0;
+
+    public ArrayList<shotClass> shotList = new ArrayList<shotClass>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
