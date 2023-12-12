@@ -85,7 +85,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/lowerEditTextNumberDecimal"
+                    android:id="@+id/lowerBound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -93,7 +93,7 @@
                     android:autofillHints=""
                     android:ems="2"
                     android:gravity="center"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textSize="36sp"
                     tools:ignore="LabelFor" />
 
@@ -107,7 +107,7 @@
                     android:textSize="36sp" />
 
                 <EditText
-                    android:id="@+id/higherEditTextNumberDecimal"
+                    android:id="@+id/upperBound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -115,7 +115,7 @@
                     android:autofillHints=""
                     android:ems="2"
                     android:gravity="center"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textSize="36sp"
                     tools:ignore="LabelFor" />
 
