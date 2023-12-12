@@ -99,20 +99,25 @@ public class StopFragment extends Fragment {
                 double mean = volume / (double) reading;
                 double actualDecibel = Math.log10(mean) * 10;
 //                    Log.d("AudioRecorder", "decibel: " + actualDecibel);
+
+                boolean isShot = false;
                 if (actualDecibel >= 40) {
                     long shotTime = SystemClock.elapsedRealtime() - startTime;
                     if (((MainActivity) requireActivity()).shotList.size() == 0) {
                         Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
                         ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime, 0));
+                        ((MainActivity) requireActivity()).updateUI(shotTime, 0, shotTime, ((MainActivity) requireActivity()).shotList.size());
                     } else {
                         shotClass lastShot = ((MainActivity) requireActivity()).shotList.get(((MainActivity) requireActivity()).shotList.size() - 1);
                         if (shotTime - lastShot.getShotTime() > 500) {
                             long splitTime = shotTime - lastShot.getShotTime();
                             ((MainActivity) requireActivity()).shotList.add(new shotClass(shotTime, splitTime));
                             Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel + "at:" + shotTime);
+                            ((MainActivity) requireActivity()).updateUI(shotTime, splitTime, shotTime, ((MainActivity) requireActivity()).shotList.size());
                         }
                     }
                 }
+
 
                 synchronized (mLock) {
                     try {

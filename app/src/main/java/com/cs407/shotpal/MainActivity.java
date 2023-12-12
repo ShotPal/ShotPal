@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void updateUI(long shotTime, long splitTime, long lastShotTime, int shotCount) {
+    public void updateUI(long shotTime, long splitTime, long lastShotTime, int shotCount) {
         // Assuming you have TextViews in your fragment_stop.xml for displaying shot details
         TextView timeCountingTextView = findViewById(R.id.timeCountingTextView);
         TextView recentShotTimeTextView = findViewById(R.id.recentShotTimeTextView);
