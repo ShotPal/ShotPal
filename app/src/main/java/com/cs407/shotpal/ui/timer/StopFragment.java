@@ -1,8 +1,15 @@
 package com.cs407.shotpal.ui.timer;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,6 +34,13 @@ public class StopFragment extends Fragment {
     private long startTime;
     private TextView timerTextView;
     private int shotCount;
+
+    private boolean isRecording = false;
+
+    final int SAMPLE_RATE = 8000;
+    final int BUFFER_SIZE = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_PCM_16BIT);
+    AudioRecord mAudioRecord;
+    Object mLock;
 
     public StopFragment() {
         // Required empty public constructor
@@ -60,9 +75,55 @@ public class StopFragment extends Fragment {
         return view;
     }
 
+
+    @SuppressLint("MissingPermission")
     public void startDetection() {
-        startTimer();
-        ((MainActivity) requireActivity()).startRecording();
+//        startTimer();
+//        ((MainActivity) requireActivity()).startRecording();
+        if (isRecording) {
+            Log.e("AudioRecord", "Recording is current in progress");
+            return;
+        }
+        mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,
+                SAMPLE_RATE, AudioFormat.CHANNEL_IN_DEFAULT, AudioFormat.ENCODING_PCM_16BIT, BUFFER_SIZE);
+        if (mAudioRecord == null) {
+            Log.e("AudioRecord", "Failed to initialize Audio Recorder");
+            return;
+        }
+
+        isRecording = true;
+        mLock = new Object();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mAudioRecord.startRecording();
+                short[] buffer = new short[BUFFER_SIZE];
+                while (isRecording) {
+                    int reading = mAudioRecord.read(buffer, 0 , BUFFER_SIZE);
+                    long volume = 0;
+
+                    for (int i = 0; i < buffer.length; i++) {
+                        volume += buffer[i] * buffer[i];
+                    }
+
+                    double mean = volume / (double) reading;
+                    double actualDecibel = Math.log10(mean) * 10;
+                    Log.d("AudioRecorder", "decibel: " + actualDecibel);
+                    if (actualDecibel >= 40) {
+                        Log.d("GunshotDetection", "Gunshot detected! Sound level: " + actualDecibel);
+                    }
+
+                    synchronized (mLock) {
+                        try {
+                            mLock.wait(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }).start();
+
     }
 
     @Override
