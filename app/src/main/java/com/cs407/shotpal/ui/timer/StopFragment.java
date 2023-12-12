@@ -132,6 +132,20 @@ public class StopFragment extends Fragment {
         outState.putInt(KEY_SHOT_COUNT, shotCount);
     }
 
+//    private void startTimer() {
+//        updateTimerThread = new Runnable() {
+//            public void run() {
+//                long millisElapsed = SystemClock.elapsedRealtime() - startTime;
+//                int seconds = (int) (millisElapsed / 1000);
+//                int minutes = seconds / 60;
+//                seconds = seconds % 60;
+//                timerTextView.setText(String.format("%02d:%02d", minutes, seconds));
+//                timerHandler.postDelayed(this, 1000);
+//            }
+//        };
+//        timerHandler.postDelayed(updateTimerThread, 0);
+//    }
+
     private void startTimer() {
         updateTimerThread = new Runnable() {
             public void run() {
@@ -139,12 +153,15 @@ public class StopFragment extends Fragment {
                 int seconds = (int) (millisElapsed / 1000);
                 int minutes = seconds / 60;
                 seconds = seconds % 60;
-                timerTextView.setText(String.format("%02d:%02d", minutes, seconds));
-                timerHandler.postDelayed(this, 1000);
+                int milliseconds = (int) (millisElapsed % 1000);
+
+                timerTextView.setText(String.format("%02d:%02d.%03d", minutes, seconds, milliseconds));
+                timerHandler.postDelayed(this, 10); // Update every 10 milliseconds for smoother display
             }
         };
         timerHandler.postDelayed(updateTimerThread, 0);
     }
+
 
     private void stopTimer() {
         timerHandler.removeCallbacks(updateTimerThread);
