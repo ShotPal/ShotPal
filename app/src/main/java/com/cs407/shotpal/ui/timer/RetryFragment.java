@@ -2,6 +2,7 @@ package com.cs407.shotpal.ui.timer;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ public class RetryFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private SharedViewModel sharedViewModel;
 
     public RetryFragment() {
         // Required empty public constructor
@@ -52,6 +55,9 @@ public class RetryFragment extends Fragment {
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.navigation_stop);
         });
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
 
         return view;
     }

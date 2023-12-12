@@ -3,6 +3,7 @@ package com.cs407.shotpal;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private long lastShotTime = 0L;
     private int shotCount = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+
 
         // Prompt the user to grant permission to record audio
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
@@ -112,54 +118,31 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-//    public static class UIHelper {
+
+//    private void handleShotFired() {
+//        long shotTime = System.currentTimeMillis() - startTime;
+//        long splitTime = startTime - lastShotTime;
 //
-//        public static void updateUI(MainActivity mainActivity, long shotTime, long splitTime, long lastShotTime, int shotCount) {
-//            mainActivity.updateUI(shotTime, splitTime, lastShotTime, shotCount);
-//        }
-//    }
-//
-//    private void handleLowSound() {
-//        // Increment the shot count
+//        // Update shot count and last shot time
 //        shotCount++;
-//
-//        // Update UI in real-time
-//        updateUI(0, 0, 0, shotCount);
+//        lastShotTime = startTime;
 //
 //        // Store shot data (e.g., in shared preferences or database)
-//        saveShotData(0, 0, 0, shotCount);
-//    }
+//        saveShotData(shotTime, splitTime, lastShotTime, shotCount);
 //
+//        // Update UI in real-time
+//        updateUI(shotTime, splitTime, lastShotTime, shotCount);
+//    }
 
     private void handleShotFired() {
-//        if (!isShotFired) {
-//            isShotFired = true;
-//            startTime = System.currentTimeMillis();
-//        } else {
-//            // Calculate shot time and split time
-//            long shotTime = System.currentTimeMillis() - startTime;
-//            long splitTime = startTime - lastShotTime;
-//
-//            // Update shot count and last shot time
-//            shotCount++;
-//            lastShotTime = startTime;
-//
-//            // Store shot data (e.g., in shared preferences or database)
-//            saveShotData(shotTime, splitTime, lastShotTime, shotCount);
-//
-//            // Update UI in real-time
-//            updateUI(shotTime, splitTime, lastShotTime, shotCount);
-//
-//            // Reset shot-fired flag
-//            isShotFired = false;
-//        }
-        long shotTime = System.currentTimeMillis() - startTime;
-        long splitTime = startTime - lastShotTime;
+        // currentTimeMillis is now from the system boot time (elapsed realtime)
+        long shotTime = SystemClock.elapsedRealtime() - startTime;
+        // splitTime is the difference between this shot time and the last shot time
+        long splitTime = shotTime - lastShotTime;
 
         // Update shot count and last shot time
         shotCount++;
-        lastShotTime = startTime;
-
+        lastShotTime = shotTime;
 
         // Store shot data (e.g., in shared preferences or database)
         saveShotData(shotTime, splitTime, lastShotTime, shotCount);
@@ -210,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startTimer() {
-        // Your existing code for starting the timer
+        // Save the start time when the user starts the stopwatch
+        startTime = SystemClock.elapsedRealtime();
+        // If you have any thread or handler for updating UI or logic related to starting the timer, initialize it here
     }
 
     private void stopTimer() {

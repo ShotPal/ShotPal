@@ -1,4 +1,5 @@
 package com.cs407.shotpal.ui.timer;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -8,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -18,6 +17,8 @@ import androidx.navigation.Navigation;
 import com.cs407.shotpal.R;
 
 public class StopFragment extends Fragment {
+
+    private static final String KEY_SHOT_COUNT = "shotCount";
 
     private Handler timerHandler = new Handler();
     private Runnable updateTimerThread;
@@ -34,23 +35,35 @@ public class StopFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stop, container, false);
 
-        timerTextView = view.findViewById(R.id.timeCountingTextView); // This is the TextView to update with the timer
+        timerTextView = view.findViewById(R.id.timeCountingTextView);
         Button stopButton = view.findViewById(R.id.stopButton);
 
-        //shot count is reset to zero
-
-        // Start the timer when the Fragment view is created
         startTime = SystemClock.elapsedRealtime();
         startTimer();
 
-
-
         stopButton.setOnClickListener(v -> {
             stopTimer();
+
+            // Reset shotCount to 0 when moving to retry fragment
+            shotCount = 0;
+
             NavController navController = Navigation.findNavController(v);
             navController.navigate(R.id.navigation_retry);
         });
+
+        // Restore shotCount if it was saved
+        if (savedInstanceState != null) {
+            shotCount = savedInstanceState.getInt(KEY_SHOT_COUNT, 0);
+        }
+
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the state of shotCount
+        outState.putInt(KEY_SHOT_COUNT, shotCount);
     }
 
     private void startTimer() {
@@ -69,11 +82,8 @@ public class StopFragment extends Fragment {
 
     private void stopTimer() {
         timerHandler.removeCallbacks(updateTimerThread);
-        // Reset the TextView when stopped if necessary
         timerTextView.setText("00:00");
     }
-
-
 
     @Override
     public void onDestroyView() {
