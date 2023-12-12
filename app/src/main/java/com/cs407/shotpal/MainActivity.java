@@ -97,10 +97,13 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-            toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500);
+            toneGen1.startTone(ToneGenerator.TONE_DTMF_0, 500);
+        }, (long) delayTime);
+
+        handler.postDelayed(() -> {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
             navController.navigate(R.id.navigation_stop);
-        }, (long) delayTime);
+        }, (long) delayTime + 500);
     }
 
     private Runnable soundLevelChecker = new Runnable() {
