@@ -3,7 +3,9 @@ package com.cs407.shotpal;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.media.MediaRecorder;
+import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -82,6 +85,22 @@ public class MainActivity extends AppCompatActivity {
                 permissionListener.onPermissionDenied();
             }
         }
+    }
+
+    public void randomSignal(int lowerBound, int upperBound) {
+        double delayTime = (int) ((Math.random() * (upperBound - lowerBound) + lowerBound) * 1000);
+        Log.d("LowerBound", "lowerBound: " + lowerBound);
+        Log.d("UpperBound", "upperBound: " + upperBound);
+        Log.d("RandomSignal", "delayTime: " + delayTime);
+        Toast.makeText(this, "StandBy...", Toast.LENGTH_SHORT).show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+            toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 500);
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+            navController.navigate(R.id.navigation_stop);
+        }, (long) delayTime);
     }
 
     private Runnable soundLevelChecker = new Runnable() {

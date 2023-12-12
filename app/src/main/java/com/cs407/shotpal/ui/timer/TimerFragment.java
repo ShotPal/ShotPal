@@ -85,24 +85,9 @@ public class TimerFragment extends Fragment implements MainActivity.PermissionLi
         return binding.getRoot();
     }
 
-    private void randomSignal(int lowerBound, int upperBound) {
-        double delayTime = (int) ((Math.random() * (upperBound - lowerBound) + lowerBound) * 1000);
-        Log.d("LowerBound", "lowerBound: " + lowerBound);
-        Log.d("UpperBound", "upperBound: " + upperBound);
-        Log.d("RandomSignal", "delayTime: " + delayTime);
-        Toast.makeText(requireActivity(), "StandBy...", Toast.LENGTH_SHORT).show();
-
-        Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
-            toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 500);
-        }, (long) delayTime);
-    }
-
     @Override
     public void onPermissionGranted() {
-        randomSignal(lowerBoundInt, upperBoundInt);
-        goToStopFragment();
+        ((MainActivity) requireActivity()).randomSignal(lowerBoundInt, upperBoundInt);
     }
 
     @Override
@@ -113,13 +98,7 @@ public class TimerFragment extends Fragment implements MainActivity.PermissionLi
         editor.putString("trackOpt", "imu");
         editor.apply();
 
-        randomSignal(lowerBoundInt, upperBoundInt);
-        goToStopFragment();
-    }
-
-    public void goToStopFragment() {
-        NavController navController = Navigation.findNavController(requireView());
-        navController.navigate(R.id.navigation_stop);
+        ((MainActivity) requireActivity()).randomSignal(lowerBoundInt, upperBoundInt);
     }
 
     @Override

@@ -9,9 +9,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
+import com.cs407.shotpal.MainActivity;
 import com.cs407.shotpal.R;
 
 public class RetryFragment extends Fragment {
@@ -53,8 +52,7 @@ public class RetryFragment extends Fragment {
 
         Button retryButton = view.findViewById(R.id.retryButton);
         retryButton.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(v);
-            navController.navigate(R.id.navigation_stop);
+            ((MainActivity) requireActivity()).randomSignal(TimerFragment.lowerBoundInt, TimerFragment.upperBoundInt);
         });
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
