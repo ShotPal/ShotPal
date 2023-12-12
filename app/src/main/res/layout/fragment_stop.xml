@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- BottomNavigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="wrap_content"
@@ -26,154 +15,147 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-
-    <!-- Retry Button -->
-    <Button
-        android:id="@+id/stopButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="Stop"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <FrameLayout
-        android:id="@+id/UsernameContainer"
-        android:layout_width="410dp"
-        android:layout_height="131dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/black_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TextView for End Time -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="Time Counting"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+        <FrameLayout
+            android:id="@+id/TimeCountingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/black_rectangle">
 
-        <!-- TextView for End Time -->
-        <TextView
-            android:id="@+id/timeCountingTextView"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/time_counting"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/timeCountingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="05.14"
+                android:textColor="@android:color/black"
+                android:textSize="48sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/RecentShotContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/black_rectangle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="start|top"
+                android:text="@string/recent_shot"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/recentShotTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="03.14"
+                android:textColor="@android:color/black"
+                android:textSize="48sp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <FrameLayout
+                android:id="@+id/SplitTimeContainer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_rectangle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start|top"
+                    android:text="@string/split_time"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/splitTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="01.14"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/ShotCountContainer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/black_rectangle">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|top"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="start|top"
+                    android:text="@string/shot_count"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/shotCountTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/stopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="05.14"
-            android:textColor="@android:color/black"
-            android:textSize="48sp" />
-
-    </FrameLayout>
-
-
-    <FrameLayout
-        android:id="@+id/RecentShotContainer"
-        android:layout_width="410dp"
-        android:layout_height="159dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernameContainer">
-
-        <!-- TextView for Shots -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="Recent Shot"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Shots -->
-        <TextView
-            android:id="@+id/recentShotTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="03.14"
-            android:textColor="@android:color/black"
-            android:textSize="48sp" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/SplitTimeContainer"
-        android:layout_width="204dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RecentShotContainer">
-
-        <!-- TextView for Avg Split -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="Split Time"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Avg Split -->
-        <TextView
-            android:id="@+id/splitTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="01.14"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/ShotCountContainer"
-        android:layout_width="204dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/black_rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SplitTimeContainer"
-        app:layout_constraintTop_toBottomOf="@+id/RecentShotContainer">
-
-        <!-- TextView for Shot Count -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="start|top"
-            android:text="Shot Count"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <!-- TextView for Shot Count -->
-        <TextView
-            android:id="@+id/shotCountTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-    </FrameLayout>
-
+            android:layout_marginTop="20dp"
+            android:text="@string/stop" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
